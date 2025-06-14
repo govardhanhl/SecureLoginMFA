@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Welcome, {{ session['email'] }} 🎉</h2>
+
+<div class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">🔐 Login Details</h5>
+    <p><strong>OTP Verified At:</strong> {{ session.get('otp_verified_time', 'Unknown') }}</p>
+    <p><strong>Your IP Address:</strong> {{ session.get('ip', 'Unknown') }}</p>
+    <p><strong>Browser Info:</strong> {{ session.get('user_agent', 'Unknown') }}</p>
+    <h4 class="mt-5">📰 Latest Cybersecurity News</h4>
+<ul class="list-group">
+    {% for article in articles %}
+    <li class="list-group-item">
+        <strong>{{ article['title'] }}</strong><br>
+        <small>{{ article['publishedAt'][:10] }}</small><br>
+        <a href="{{ article['url'] }}" target="_blank">Read more</a>
+    </li>
+    {% endfor %}
+</ul>
+
+  </div>
+</div>
+
+<a href="/logout" class="btn btn-danger mt-4">Logout</a>
+{% endblock %}

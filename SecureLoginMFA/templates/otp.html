@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if otp_uri %}
+    <h4>Scan QR in Google Authenticator</h4>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?data={{ otp_uri | urlencode }}&size=200x200">
+    <p class="mt-2">After scanning, <a href="/login">click here to login</a>.</p>
+{% else %}
+    <h4>Enter the OTP from Google Authenticator</h4>
+    <form method="POST">
+        <input type="text" name="otp" class="form-control w-25" required>
+        <button type="submit" class="btn btn-success mt-2">Verify</button>
+    </form>
+{% endif %}
+{% endblock %}
